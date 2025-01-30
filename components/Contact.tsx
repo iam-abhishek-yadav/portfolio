@@ -24,9 +24,6 @@ export default function Contact() {
 						Send an Email
 					</a>
 				</div>
-				<p className="mt-4 text-center text-gray-400">
-					Or, you can also contact me via social media.
-				</p>
 			</motion.div>
 		</section>
 	)
