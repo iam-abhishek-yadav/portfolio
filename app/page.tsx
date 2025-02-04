@@ -1,12 +1,10 @@
 import About from "@/components/About"
 import Blog from "@/components/Blog"
 import Certifications from "@/components/Certification"
-import Contact from "@/components/Contact"
 import Experience from "@/components/Experience"
 import Hero from "@/components/Hero"
 import Profiles from "@/components/Profiles"
 // import Projects from "@/components/Projects"
-import Resume from "@/components/Resume"
 import Skills from "@/components/Skills"
 import type { Metadata } from "next"
 
@@ -27,8 +25,6 @@ export default function Home() {
 			<Certifications />
 			<Profiles />
 			<Blog />
-			<Resume />
-			<Contact />
 		</main>
 	)
 }
