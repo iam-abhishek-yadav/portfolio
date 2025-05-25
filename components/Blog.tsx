@@ -28,16 +28,23 @@ export default function Blog() {
 							className="bg-gray-800 rounded-lg p-6 shadow-lg"
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.5, delay: index * 0.1 }}>
+							transition={{ duration: 0.5, delay: index * 0.1 }}
+							whileHover={{ 
+								scale: 1.02,
+								transition: { duration: 0.2 }
+							}}
+							whileTap={{ scale: 0.98 }}>
 							<h3 className="text-xl font-semibold mb-2">{post.title}</h3>
 							<p className="text-gray-400 mb-4">{post.excerpt}</p>
-							<a
+							<motion.a
 								href={post.link}
 								className="text-blue-400 hover:text-blue-300 transition duration-300"
 								target="_blank"
-								rel="noopener noreferrer">
+								rel="noopener noreferrer"
+								whileHover={{ x: 5 }}
+								transition={{ type: "spring", stiffness: 400, damping: 10 }}>
 								Read More →
-							</a>
+							</motion.a>
 						</motion.div>
 					))}
 				</div>

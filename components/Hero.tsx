@@ -46,7 +46,7 @@ export default function Hero() {
 
 					{/* Resume download button */}
 					<motion.a
-						href="https://drive.google.com/uc?export=download&id=1tgc_udyYaic3R3ZajjXF-63-D3e1n43B"
+						href="https://drive.google.com/file/d/1310BNKofwiY_nw8VP7wTNWWHB14cIS1T/view?usp=sharing"
 						download
 						className="inline-flex items-center bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105"
 						whileHover={{ scale: 1.05 }}

@@ -1,6 +1,7 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useScroll, useTransform } from "framer-motion"
+import { useRef } from "react"
 import { FaBriefcase } from "react-icons/fa"
 
 const experiences = [
@@ -38,36 +39,107 @@ const experiences = [
 ]
 
 export default function Experience() {
+	const containerRef = useRef(null)
+	const { scrollYProgress } = useScroll({
+		target: containerRef,
+		offset: ["start end", "end start"]
+	})
+
+	const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0])
+	const y = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [100, 0, 0, -100])
+
 	return (
 		<section
 			id="experience"
-			className="py-20 px-4 max-w-4xl mx-auto">
+			className="py-20 px-4 max-w-4xl mx-auto"
+			ref={containerRef}>
 			<motion.div
+				style={{ opacity, y }}
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.8 }}>
-				<h2 className="text-3xl font-bold mb-6 text-center">Experience</h2>
+				<motion.h2 
+					className="text-3xl font-bold mb-12 text-center"
+					initial={{ opacity: 0, y: -20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.5 }}>
+					Experience
+				</motion.h2>
 				<div className="space-y-8">
 					{experiences.map((exp, index) => (
 						<motion.div
 							key={index}
-							className="bg-gray-800 rounded-lg p-6 shadow-lg"
-							initial={{ opacity: 0, y: 20 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.5, delay: index * 0.1 }}>
-							<div className="flex items-center mb-4">
-								<FaBriefcase
-									className="text-blue-400 mr-2"
-									size={24}
-								/>
-								<h3 className="text-xl font-semibold">{exp.title}</h3>
-							</div>
-							<p className="text-gray-400 mb-2">
-								{exp.company} | {exp.period} | {exp.location}
-							</p>
-							<p className="text-gray-300 whitespace-pre-line">
-								{exp.description}
-							</p>
+							className="group relative"
+							initial={{ opacity: 0, x: -50 }}
+							animate={{ opacity: 1, x: 0 }}
+							transition={{ 
+								duration: 0.5, 
+								delay: index * 0.2,
+								type: "spring",
+								stiffness: 100
+							}}
+							whileHover={{ 
+								scale: 1.02,
+								transition: { duration: 0.2 }
+							}}>
+							<motion.div 
+								className="bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-700 hover:border-blue-400"
+								whileHover={{ 
+									boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+								}}>
+								<div className="flex items-start justify-between mb-4">
+									<div className="flex items-center">
+										<motion.div 
+											className="bg-blue-400/10 p-3 rounded-lg mr-4"
+											whileHover={{ 
+												scale: 1.1,
+												backgroundColor: "rgba(96, 165, 250, 0.2)"
+											}}
+											transition={{ duration: 0.2 }}>
+											<FaBriefcase
+												className="text-blue-400"
+												size={24}
+											/>
+										</motion.div>
+										<div>
+											<motion.h3 
+												className="text-xl font-semibold text-white group-hover:text-blue-400 transition-colors"
+												whileHover={{ scale: 1.05 }}
+												transition={{ duration: 0.2 }}>
+												{exp.title}
+											</motion.h3>
+											<motion.p 
+												className="text-gray-400"
+												initial={{ opacity: 0 }}
+												animate={{ opacity: 1 }}
+												transition={{ delay: index * 0.2 + 0.3 }}>
+												{exp.company}
+											</motion.p>
+										</div>
+									</div>
+									<motion.div 
+										className="text-right"
+										initial={{ opacity: 0, x: 20 }}
+										animate={{ opacity: 1, x: 0 }}
+										transition={{ delay: index * 0.2 + 0.4 }}>
+										<p className="text-blue-400 font-medium">
+											{exp.period}
+										</p>
+										<p className="text-gray-400 text-sm">
+											{exp.location}
+										</p>
+									</motion.div>
+								</div>
+								<motion.div 
+									className="border-t border-gray-700 pt-4"
+									initial={{ opacity: 0, y: 20 }}
+									animate={{ opacity: 1, y: 0 }}
+									transition={{ delay: index * 0.2 + 0.5 }}>
+									<p className="text-gray-300 whitespace-pre-line leading-relaxed">
+										{exp.description}
+									</p>
+								</motion.div>
+							</motion.div>
 						</motion.div>
 					))}
 				</div>

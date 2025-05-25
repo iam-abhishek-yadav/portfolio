@@ -106,9 +106,23 @@ export default function Skills() {
 							className="flex flex-col items-center"
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.5, delay: index * 0.1 }}>
-							<skill.icon className={`text-4xl ${skill.color} mb-2`} />
-							<span className="text-sm">{skill.name}</span>
+							transition={{ duration: 0.5, delay: index * 0.1 }}
+							whileHover={{ 
+								scale: 1.1,
+								transition: { duration: 0.2 }
+							}}
+							whileTap={{ scale: 0.95 }}>
+							<motion.div
+								whileHover={{ rotate: 360 }}
+								transition={{ duration: 0.5 }}>
+								<skill.icon className={`text-4xl ${skill.color} mb-2`} />
+							</motion.div>
+							<motion.span 
+								className="text-sm"
+								whileHover={{ scale: 1.1 }}
+								transition={{ type: "spring", stiffness: 400, damping: 10 }}>
+								{skill.name}
+							</motion.span>
 						</motion.div>
 					))}
 				</div>

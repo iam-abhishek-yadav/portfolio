@@ -50,13 +50,25 @@ export default function Profiles() {
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.5, delay: index * 0.1 }}
-							whileHover={{ scale: 1.05 }}
+							whileHover={{ 
+								scale: 1.05,
+								transition: { duration: 0.2 }
+							}}
 							whileTap={{ scale: 0.95 }}>
-							<profile.icon
-								size={40}
-								className="text-blue-400 mb-2"
-							/>
-							<span className="text-center">{profile.name}</span>
+							<motion.div
+								whileHover={{ rotate: 360 }}
+								transition={{ duration: 0.5 }}>
+								<profile.icon
+									size={40}
+									className="text-blue-400 mb-2"
+								/>
+							</motion.div>
+							<motion.span 
+								className="text-center"
+								whileHover={{ scale: 1.1 }}
+								transition={{ type: "spring", stiffness: 400, damping: 10 }}>
+								{profile.name}
+							</motion.span>
 						</motion.a>
 					))}
 				</div>
